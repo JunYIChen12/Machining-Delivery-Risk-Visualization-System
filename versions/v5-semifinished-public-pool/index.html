@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v5 半成品公共池产品原型 Demo</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand"><div class="brand-mark">POOL</div><div><h1>半成品公共池</h1><p>基于可信报工的生产事实看板</p></div></div>
+        <section class="side-panel"><div class="side-title">第一版只回答</div><div class="answer-card active"><strong>公共池状态</strong><span>理论上有多少半成品生产能力</span></div><div class="answer-card"><strong>订单需求状态</strong><span>哪些订单需要这个半成品</span></div></section>
+        <section class="side-panel"><div class="side-title">可信数据边界</div><ul class="trust-list"><li>BOM / 订单需求</li><li>标准工艺路线</li><li>工序报工数量</li><li>工单、设备、人员</li></ul></section>
+        <section class="boundary"><strong>不做判断</strong><span>不读取库存，不判断占用，不判断真实可交付，不给出“应该给谁”的分配结论。</span></section>
+      </aside>
+      <main class="main">
+        <header class="hero"><div><span class="eyebrow">Semifinished Public Pool MVP</span><h2>把分散报工汇总成“半成品名称 + 规格”的理论生产事实池</h2><p>公共池不是库存池，也不是订单占用池；它只基于 BOM、工艺路线和报工记录，展示半成品理论完成量、在制数量、当前卡点和订单需求关系。</p></div><div class="formula-card"><span>核心计算口径</span><strong>理论完成量 = 所有必经工序报工数量的最小值</strong></div></header>
+        <section class="metric-grid" id="metricGrid"></section>
+        <section class="workspace"><section class="surface main-board"><div class="section-head"><div><h3>半成品公共池总览</h3><p>按半成品名称 + 规格聚合，不展示库存，不展示占用</p></div><div class="segmented" id="riskFilter"></div></div><div class="pool-board" id="poolBoard"></div></section><aside class="detail-column"><section class="surface"><div class="section-head compact"><div><h3>理论完成量拆解</h3><p>瓶颈工序决定公共池理论完成量</p></div></div><div class="detail-body" id="completionDetail"></div></section><section class="surface"><div class="section-head compact"><div><h3>关联订单需求</h3><p>只表示“需要”，不表示“占用”</p></div></div><div class="detail-body" id="demandDetail"></div></section></aside></section>
+        <section class="surface lower-panel"><div class="section-head"><div><h3>公共池与需求关系图</h3><p>左侧是半成品公共池，右侧是订单需求；连线表示需求关系，不表示分配关系</p></div></div><div class="relationship-wrap"><svg id="relationshipSvg" viewBox="0 0 1180 520" role="img" aria-label="半成品公共池与订单需求关系图"></svg></div></section>
+      </main>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
